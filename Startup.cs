@@ -41,7 +41,9 @@ namespace Cookbook
                 return new MongoClient(settings.ConnectionString);
             });
             services.AddSingleton<IItemsRepository, MongoDbItemsRepository>();
-            services.AddControllers();
+            services.AddControllers(option => {
+                option.SuppressAsyncSuffixInActionNames = false;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cookbook", Version = "v1" });
